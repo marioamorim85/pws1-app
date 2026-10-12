@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-dark">Olá, Laravel!</h1>
+        <h1 class="text-dark">Olá, Laravel!!!</h1>
         <a href="/perfil" class="btn btn-primary">Ver Perfil</a>
     </div>
 </body>
