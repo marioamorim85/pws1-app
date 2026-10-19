@@ -4,38 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" rel="stylesheet">
 </head>
 <body>
-    <main class="container mt-5">
-        <h1 class="mb-4">Eventos</h1>
+    <main class="container">
+        <p><a href="/" role="button" class="primary">Voltar ao início</a></p>
+        <h1>Eventos</h1>
 
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Evento</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Vagas disponíveis</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($eventos as $evento)
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Evento</th>
-                        <th scope="col">Data</th>
-                        <th scope="col">Vagas disponíveis</th>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $evento['titulo'] }}</td>
+                        <!-- <td>{{ $evento['data'] }}</td> -->
+                        <td>{{ date('d/m/Y', strtotime($evento['data'])) }}</td>
+                        <td>
+                            @if ($evento['inscritos'] >= $evento['vagas'])
+                                <strong>Esgotado</strong>
+                            @else
+                                {{ $evento['vagas'] - $evento['inscritos'] }}
+                            @endif
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @forelse ($eventos as $evento)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $evento['titulo'] }}</td>
-                            <td>{{ $evento['data'] }}</td>
-                            <td>{{ $evento['vagas'] - $evento['inscritos'] }}</td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4">Não há eventos para mostrar.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+                @empty
+                    <tr>
+                        <td colspan="4">Não há eventos para mostrar.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </main>
 </body>
 </html>
