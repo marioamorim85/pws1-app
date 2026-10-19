@@ -108,6 +108,7 @@ Route::get('/perfil', function () {
 
 Route::get('/eventos', function () use ($eventos) {
     $tipo = request('tipo');
+    $disponibilidade = request('disponibilidade');
 
     if ($tipo) {
         $eventos = array_filter($eventos,
@@ -115,9 +116,22 @@ Route::get('/eventos', function () use ($eventos) {
         );
     }
 
+    if ($disponibilidade === 'Esgotados') {
+        $eventos = array_filter(
+            $eventos,
+            fn ($evento) => $evento['inscritos'] >= $evento['vagas']
+        );
+    } elseif ($disponibilidade === 'Disponíveis') {
+        $eventos = array_filter(
+            $eventos,
+            fn ($evento) => $evento['inscritos'] < $evento['vagas']
+        );
+    }
+
     return view('eventos.index', [
         'eventos' => $eventos,
         'tipo' => $tipo,
+        'disponibilidade' => $disponibilidade,
     ]);
 });
 
