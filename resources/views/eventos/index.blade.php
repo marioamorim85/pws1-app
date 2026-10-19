@@ -9,7 +9,18 @@
 <body>
     <main class="container">
         <p><a href="/" role="button" class="primary">Voltar ao início</a></p>
-        <h1>Eventos</h1>
+        <h1>Evento @if ($tipo) - {{ ucfirst($tipo) }} @endif</h1>
+        
+        <hr>
+
+        <nav>
+            <a href="/eventos">Todos os eventos</a>
+            <a href="/eventos?tipo=workshop">Workshops</a>
+            <a href="/eventos?tipo=palestra">Palestras</a>
+            <a href="/eventos?tipo=hackathon">Hackathons</a>
+        </nav>
+        
+        <hr>
 
         <table>
             <thead>
@@ -24,7 +35,7 @@
                 @forelse ($eventos as $evento)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $evento['titulo'] }}</td>
+                        <td><a href="/eventos/{{ $evento['id'] }}">{{ $evento['titulo'] }}</a></td>
                         <!-- <td>{{ $evento['data'] }}</td> -->
                         <td>{{ date('d/m/Y', strtotime($evento['data'])) }}</td>
                         <td>

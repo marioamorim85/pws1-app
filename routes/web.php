@@ -100,8 +100,42 @@ Route::get('/perfil', function () {
     ]);
 });
 
+// Route::get('/eventos', function () use ($eventos) {
+//     return view('eventos.index', [
+//         'eventos' => $eventos,
+//     ]);
+// });
+
 Route::get('/eventos', function () use ($eventos) {
+    $tipo = request('tipo');
+
+    if ($tipo) {
+        $eventos = array_filter($eventos,
+            fn ($evento) => $evento['tipo'] === $tipo
+        );
+    }
+
     return view('eventos.index', [
         'eventos' => $eventos,
+        'tipo' => $tipo,
     ]);
 });
+
+Route::get('/eventos/{id}', function (int $id) use ($eventos) {
+    // Filtrar o evento pelo ID
+    $evento = null;
+
+    foreach ($eventos as $item) {
+        if ($item['id'] === $id) {
+            $evento = $item;
+        } 
+    }
+
+    if ($evento === null) {
+        abort(404);
+    }
+
+    return view('eventos.show', [
+        'evento' => $evento,
+    ]);
+})->whereNumber('id');
