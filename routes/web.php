@@ -51,27 +51,12 @@ Route::get('/', function () {
 //     ]);
 // });
 
-Route::get('/eventos', [EventoController::class, 'index']);
+Route::get('/eventos', [EventoController::class, 'index'])
+    ->name('eventos.index');
 
-Route::get('/eventos/proximos', function () {
-    $eventos = config('eventos');
-    $hoje = date('Y-m-d');
+Route::get('/eventos/proximos', [EventoController::class, 'proximos'] )
+    ->name('eventos.proximos');
 
-    $eventos = array_filter(
-        $eventos,
-        fn ($evento) => $evento['data'] >= $hoje
-    );
-
-    usort(
-        $eventos,
-        fn ($a, $b) => $a['data'] <=> $b['data']
-    );
-
-    return view('eventos.index', [
-        'eventos' => $eventos,
-        'tipo' => null,
-        'disponibilidade' => null,
-    ]);
-});
-
-Route::get('/eventos/{id}', [EventoController::class, 'show'])->whereNumber('id');
+Route::get('/eventos/{id}', [EventoController::class, 'show'])
+    ->whereNumber('id')
+    ->name('eventos.show');

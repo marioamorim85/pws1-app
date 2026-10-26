@@ -41,6 +41,28 @@ class EventoController extends Controller
         ]);
     }
 
+    public function proximos(): view
+    {
+        $eventos = config('eventos');
+        $hoje = date('Y-m-d');
+
+        $eventos = array_filter(
+            $eventos,
+            fn ($evento) => $evento['data'] >= $hoje
+        );
+
+        usort(
+            $eventos,
+            fn ($a, $b) => $a['data'] <=> $b['data']
+        );
+
+        return view('eventos.index', [
+            'eventos' => $eventos,
+            'tipo' => null,
+            'disponibilidade' => null,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -60,17 +82,9 @@ class EventoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(int $id): View
     {
-        $eventos = config('eventos');
-        // Filtrar o evento pelo ID
-        $evento = null;
-
-        foreach ($eventos as $item) {
-            if ($item['id'] === $id) {
-                $evento = $item;
-            } 
-        }
+        $evento = $this->procurar($id);
 
         if ($evento === null) {
             abort(404);
@@ -79,6 +93,17 @@ class EventoController extends Controller
         return view('eventos.show', [
             'evento' => $evento,
         ]);
+    }
+
+    private function procurar(int $id): ?array
+    {
+        foreach (config('eventos') as $evento) {
+            if ($evento['id'] === $id) {
+                return $evento;
+            } 
+        }
+
+        return null;
     }
 
     /**
