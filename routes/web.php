@@ -5,9 +5,6 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\InicioController;
 
 
-Route::get('/', function () {
-    return view('inicio');
-});
 
 Route::get('/', [InicioController::class, 'index'])
     ->name('inicio');
@@ -64,3 +61,9 @@ Route::get('/eventos/proximos', [EventoController::class, 'proximos'] )
 Route::get('/eventos/{id}', [EventoController::class, 'show'])
     ->whereNumber('id')
     ->name('eventos.show');
+
+Route::fallback(function () {
+    return response() ->view('errors.404', [], 404);
+}
+
+);
