@@ -58,9 +58,13 @@ Route::get('/eventos', [EventoController::class, 'index'])
 Route::get('/eventos/proximos', [EventoController::class, 'proximos'] )
     ->name('eventos.proximos');
 
-Route::get('/eventos/{id}', [EventoController::class, 'show'])
+Route::get('/atividades/{id}', [EventoController::class, 'show'])
     ->whereNumber('id')
     ->name('eventos.show');
+
+// Encaminha URLs como /evento(tipo/workshop para o método porTipo()
+Route::get('/eventos/tipo/{tipo}', [EventoController::class, 'porTipo'])
+    ->name('eventos.tipo');
 
 Route::fallback(function () {
     return response() ->view('errors.404', [], 404);

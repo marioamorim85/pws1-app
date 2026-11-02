@@ -18,3 +18,7 @@ B5.	/dobro/abc devolve 404: a restrição whereNumber faz com que a rota não co
 
 # Ver rotas activas
 php artisan route:list --except-vendor
+
+
+# Desafio PL03
+A rota '/eventos/tipo/{tipo}' não entra em conflito com '/eventos/{id} porque a primeira tem três segmentos ('eventos', 'tipo' e o valor de '{tipo}'), enquanto a segunda tem dois ('eventos´e o valor de '{id}'). Além disso, '{id}' só aceita númetos devido a 'whereNumber('id')'.
