@@ -63,7 +63,7 @@
                 @forelse ($eventos as $evento)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><a href="/eventos/{{ $evento['id'] }}">{{ $evento['titulo'] }}</a></td>
+                        <td><a href="{{ route('eventos.show', $evento['id']) }}">{{ $evento['titulo'] }}</a></td>
                         <!-- <td>{{ $evento['data'] }}</td> -->
                         <td>{{ date('d/m/Y', strtotime($evento['data'])) }}</td>
                         <td>
