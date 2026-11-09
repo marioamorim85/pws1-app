@@ -10,10 +10,10 @@
 <body>
     @include('partials.menu')
 
-    <main class="container">
+    <main class="contentor">
         @yield('conteudo')
     </main>
 
-    
+    @include('partials.rodape')
 </body>
 </html>
