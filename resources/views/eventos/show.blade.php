@@ -3,7 +3,7 @@
 @section('titulo', $evento['titulo'])
 
 @section('conteudo')
-    <p><a href="{{ route('eventos.index') }}" role="button" class="primary">Voltar aos eventos</a></p>
+    <p><a href="{{ route('eventos.index') }}" role="button" class="botao">Voltar aos eventos</a></p>
 
     <h1>{{ $evento['titulo'] }}</h1>
 

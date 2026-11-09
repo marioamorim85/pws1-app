@@ -9,7 +9,7 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: system-ui, sans-serif; color: var(--texto); line-height: 1.5; }
-.contentor { max-width: 960px; margin: 0 auto; padding: 0 1rem; }
+.contentor { max-width: 960px; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
 a { color: var(--info); }
 
 .topo { background: var(--cor); }
@@ -19,7 +19,7 @@ a { color: var(--info); }
 .topo ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
 .topo a[aria-current="page"] { border-bottom: 2px solid #fff; }
 
-main { padding-top: 1.5rem; padding-bottom: 2rem; min-height: 70vh; }
+body > main { padding-top: 2rem; padding-bottom: 2rem; min-height: 70vh; }
 
 .grelha { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
 .cartao { background: var(--cor-clara); border-radius: 8px; padding: 1rem; }

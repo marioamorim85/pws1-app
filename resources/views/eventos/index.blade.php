@@ -3,7 +3,7 @@
 @section('titulo', 'Eventos')
 
 @section('conteudo')
-    <p><a href="/" role="button" class="primary">Voltar ao início</a></p>
+    <p><a href="/" role="button" class="botao">Voltar ao início</a></p>
     <h1>Evento @if ($tipo) - {{ ucfirst($tipo) }} @endif</h1>
     
     <hr>
