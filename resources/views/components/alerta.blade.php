@@ -1,4 +1,4 @@
-<!-- Caixa de avido -->
+<!-- Caixa de aviso -->
 @props(['tipo' => 'info'])
 
 <!-- o texto entre as etiquetas chega no $slot -->

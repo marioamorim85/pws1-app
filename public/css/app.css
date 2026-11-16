@@ -6,6 +6,7 @@
     --cinza: #6b6b6b;
     --aviso: #fff4e0;
     --info: #eaf4ea;
+    --white: #fff;
 }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: system-ui, sans-serif; color: var(--texto); line-height: 1.5; }
