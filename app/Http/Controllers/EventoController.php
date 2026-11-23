@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {
@@ -18,7 +19,7 @@ class EventoController extends Controller
         $tipo = $request->query('tipo');
         $disponibilidade = $request->query('disponibilidade');
 
-        $eventos = DB::table('eventos')
+        $eventos = Evento::query()
             ->when($tipo, fn($consulta) => $consulta->where('tipo', $tipo))
             ->when($disponibilidade === 'Esgotados', 
                 fn($consulta) => $consulta->whereColumn('inscritos', '>=', 'vagas'))
@@ -72,7 +73,7 @@ class EventoController extends Controller
         //     fn ($a, $b) => $a['data'] <=> $b['data']
         // );
 
-        $eventos= DB::table('eventos')
+        $eventos= Evento::query()
             ->where('data', '>=', now()->toDateString())
             ->orderBy('data')
             ->get();
@@ -103,13 +104,13 @@ class EventoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id): View
+    public function show(Evento $evento): View
     {
-        $evento = DB::table('eventos')->find($id);
+        // $evento = Evento::find($id);
 
-        if ($evento === null) {
-            abort(404);
-        }
+        // if ($evento === null) {
+        //     abort(404);
+        // }
 
         return view('eventos.show', [
             'evento' => $evento,
@@ -140,7 +141,7 @@ class EventoController extends Controller
         //     abort(404);
         // }
 
-        $eventos = DB::table('eventos')
+        $eventos = Evento::query()
             ->where('tipo', $tipo)
             ->orderBy('data')
             ->get();

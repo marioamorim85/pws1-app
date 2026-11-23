@@ -58,8 +58,8 @@ Route::get('/eventos', [EventoController::class, 'index'])
 Route::get('/eventos/proximos', [EventoController::class, 'proximos'] )
     ->name('eventos.proximos');
 
-Route::get('/atividades/{id}', [EventoController::class, 'show'])
-    ->whereNumber('id')
+Route::get('/eventos/{evento}', [EventoController::class, 'show'])
+    ->whereNumber('evento')
     ->name('eventos.show');
 
 // Encaminha URLs como /evento(tipo/workshop para o método porTipo()

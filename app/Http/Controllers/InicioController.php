@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\DB; 
+// use Illuminate\Support\Facades\DB; 
+use App\Models\Evento;
 
 class InicioController extends Controller
 {
@@ -26,7 +27,7 @@ class InicioController extends Controller
         //     fn ($a, $b) => strcmp($a['data'], $b['data'])
         // );
 
-        $proximos = DB::table('eventos')
+        $proximos = Evento::query()
             ->where('data', '>=', now()->toDateString())
             ->orderBy('data')
             ->limit(3)

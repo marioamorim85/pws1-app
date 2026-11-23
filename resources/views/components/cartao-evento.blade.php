@@ -12,5 +12,5 @@
     </h3>
 
     <!-- Data do evento -->
-    <p>{{ date('d/m/Y', strtotime($evento->data)) }} · {{ $evento->local }}</p>
+    <p>{{ $evento->data->format('d/m/Y') }} · {{ $evento->local }}</p>
 </article>
