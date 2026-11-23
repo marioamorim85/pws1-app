@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Tipo;
+use App\Models\Evento;
 
 class EventoSeeder extends Seeder
 {
@@ -14,9 +16,10 @@ class EventoSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("eventos")->insert([[
+        $tipos = Tipo::pluck('id', 'slug');
+        Evento::create([
             'titulo' => 'Hacklaton ISLA 24h',
-            'tipo' => 'hackaton',
+            'tipo_id' => $tipos['hackathon'],
             'data' => '2026-11-25',
             'local' => 'Auditório Principal',
             'descricao' => 'Evento de hackaton com duração de 24 horas.',
@@ -24,10 +27,11 @@ class EventoSeeder extends Seeder
             'inscritos' => 41,
             'created_at' => now(),
             'updated_at' => now(),
-        ],
-        [
+        ]);
+        
+        Evento::create([
             'titulo' => 'Workshop de Laravel',
-            'tipo' => 'workshop',
+            'tipo_id' => $tipos['workshop'],
             'data' => '2026-10-14',
             'local' => 'Laboratório 2.05',
             'descricao' => 'Workshop de Laravel para iniciantes.',
@@ -35,10 +39,10 @@ class EventoSeeder extends Seeder
             'inscritos' => 12,
             'created_at' => now(),
             'updated_at' => now(),
-        ],
-        [
+        ]);
+        Evento::create([
             'titulo' => 'Palestra: Carreiras em Cibersegurança',
-            'tipo' => 'palestra',
+            'tipo_id' => $tipos['palestra'],
             'data' => '2026-10-21',
             'local' => 'Auditório',
             'descricao'=> 'Workshop sobre carreiras em cibersegurança.',
@@ -46,10 +50,10 @@ class EventoSeeder extends Seeder
             'inscritos' => 120,
             'created_at' => now(),
             'updated_at' => now(),
-        ],
-        [
+        ]);
+        Evento::create([
             'titulo' => 'Git e GitHub para iniciantes',
-            'tipo' => 'workshop',
+            'tipo_id' => $tipos['workshop'],
             'data' => '2026-09-30',
             'local' => 'Laboratório 1.02',
             'descricao' => 'Workshop sobre Git e GitHub para iniciantes.',
@@ -57,10 +61,10 @@ class EventoSeeder extends Seeder
             'inscritos' => 25,
             'created_at' => now(),
             'updated_at' => now(),
-        ],
-        [
+        ]);
+        Evento::create([
             'titulo' => 'Conversa com antigos alunos DWDM',
-            'tipo' => 'palestra',
+            'tipo_id' => $tipos['hackathon'],
             'data' => '2026-12-02',
             'local' => 'Sala 3.10',
             'descricao'=> 'Conversa com antigos alunos do curso de DWDM.',
@@ -68,10 +72,10 @@ class EventoSeeder extends Seeder
             'inscritos' => 9,
             'created_at' => now(),
             'updated_at' => now(),
-        ],
-        [
+        ]);
+        Evento::create([
             'titulo' => 'Workshop de desenvolvimento web',
-            'tipo' => 'workshop',
+            'tipo_id' => $tipos['workshop'],
             'data' => '2026-12-10',
             'local' => 'Laboratório 2.01',
             'descricao'=> 'Workshop de desenvolvimento web.',
@@ -79,6 +83,6 @@ class EventoSeeder extends Seeder
             'inscritos' => 0,
             'created_at' => now(),
             'updated_at' => now(),
-        ]]);
+        ]);
     }
 }

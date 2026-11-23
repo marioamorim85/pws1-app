@@ -23,7 +23,7 @@ class EventoController extends Controller
             ->when($tipo, fn($consulta) => $consulta->where('tipo', $tipo))
             ->when($disponibilidade === 'Esgotados', 
                 fn($consulta) => $consulta->whereColumn('inscritos', '>=', 'vagas'))
-            ->when($disponibilidade === 'Disponívies', 
+            ->when($disponibilidade === 'Disponíveis', 
                 fn($consulta) => $consulta->whereColumn('inscritos', '<', 'vagas'))
             ->orderBy('data')
             ->get();
