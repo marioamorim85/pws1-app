@@ -28,7 +28,7 @@ class EventoSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        
+
         Evento::create([
             'titulo' => 'Workshop de Laravel',
             'tipo_id' => $tipos['workshop'],
@@ -64,7 +64,7 @@ class EventoSeeder extends Seeder
         ]);
         Evento::create([
             'titulo' => 'Conversa com antigos alunos DWDM',
-            'tipo_id' => $tipos['hackathon'],
+            'tipo_id' => $tipos['palestra'],
             'data' => '2026-12-02',
             'local' => 'Sala 3.10',
             'descricao'=> 'Conversa com antigos alunos do curso de DWDM.',

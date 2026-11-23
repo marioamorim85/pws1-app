@@ -7,7 +7,7 @@
     <style>
         .etiqueta-workshop { color: yellow;}
         .etiqueta-palestra { color: cyan;}
-        .etiqueta-hachathon { color: blue;}
+        .etiqueta-hackathon { color: blue; }
     </style>
 @endpush
 
@@ -16,6 +16,16 @@
     <h1>{{ config('app.name') }}</h1> 
     <p>Workshops, palestras e hackathons do ISLA Gaia.</p> 
     <p><a href="{{ route('eventos.index') }}" class="botao">Ver eventos</a></p>
+
+    <h2>Eventos por tipo</h2>
+    <ul>
+        @foreach ( $tipos as $tipo )
+            <li>
+                <span class="etiqueta-{{ $tipo->slug }}">{{ $tipo->nome }}</span>
+                <span>({{ $tipo->eventos_count }} eventos)</span>
+            </li>
+        @endforeach
+    </ul>
 
     <h2>Próximos Eventos</h2>
     <div class="grelha">

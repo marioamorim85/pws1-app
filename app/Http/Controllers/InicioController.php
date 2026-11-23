@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 // use Illuminate\Support\Facades\DB; 
 use App\Models\Evento;
+use App\Models\Tipo;
 
 class InicioController extends Controller
 {
@@ -27,6 +28,10 @@ class InicioController extends Controller
         //     fn ($a, $b) => strcmp($a['data'], $b['data'])
         // );
 
+        $tipos = Tipo::withCount('eventos')
+            ->orderBy('nome')
+            ->get();
+
         $proximos = Evento::query()->with('tipo')
             ->where('data', '>=', now()->toDateString())
             ->orderBy('data')
@@ -35,6 +40,7 @@ class InicioController extends Controller
 
         return view('inicio', [
             'proximos' => $proximos,
+            'tipos' => $tipos
         ]);
     }
 
